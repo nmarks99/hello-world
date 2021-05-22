@@ -5,7 +5,8 @@ int main(void){
 
     // printf("Hello, I am a C program :) \r\n");
 
-    system("C:/Users/nmark/Documents/GitHub/hello-world/my_script.sh");
+    // system("C:/Users/nmark/Documents/GitHub/hello-world/my_script.sh");
+    system("mypy1.py");
 
     return 0;
 }
