@@ -5,7 +5,6 @@ from sklearn import linear_model
 from matplotlib import pyplot as plt
 import pickle
 
-
 dataPath = r"C:\Users\nmark\Documents\GitHub\hello-world\ML_linear_regression\data\student-mat.csv"
 data = pd.read_csv(dataPath,sep=';')
 
