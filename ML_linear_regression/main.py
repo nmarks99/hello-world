@@ -7,6 +7,7 @@ from matplotlib import style
 import pickle
 import os
 
+
 dataPath = r"data\student-mat.csv"
 data = pd.read_csv(dataPath,sep=';')
 data = data[["G1","G2","G3","studytime","failures","absences"]]
@@ -51,6 +52,9 @@ if not os.path.exists("studentmodel.pickle"):
         f.close()
 else:
     print('Using previously trained model')
+    with open('model_stats.txt','r+') as f:
+        print(f.read())
+
     x_train, x_test, y_train, y_test = sklearn.model_selection.train_test_split(X,Y,test_size = 0.1)
 
 pickle_in = open("studentmodel.pickle","rb")
@@ -61,10 +65,11 @@ linear = pickle.load(pickle_in)
 
 predictions = linear.predict(x_test)
 
+# Plot results
 p = 'G1' 
 style.use("ggplot")
 plt.scatter(data[p],data['G3'])
-plt.xlabel(p)
+plt.xlabel('First Grade')
 plt.ylabel('Final Grade')
 plt.show()
 
