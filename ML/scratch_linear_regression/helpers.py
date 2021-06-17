@@ -1,4 +1,6 @@
 import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd 
 
 def compute_error(b, m, points):
     # Initialize error at 0
