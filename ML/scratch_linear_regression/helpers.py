@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd 
+from matplotlib import style
 
 def compute_error(b, m, points):
     # Initialize error at 0
@@ -50,7 +51,26 @@ def gradient_descent_runner(points,starting_b,starting_m,learningRate,num_iterat
     for i in range(num_iterations):
         # update b and m with new more accurate b and m by performing this gradient step
         (b, m) = step_gradient(b, m, np.array(points),learningRate)
-    
     return (b,m)
 
+def make_plot(points,b,m):
 
+    style.use('bmh')
+
+    hrs = []
+    scores = []
+    for i in range(len(points)):
+        hrs.append(points[i,0])
+        scores.append(points[i,1])
+
+    y = []
+    for x in range(len(points)):
+        y.append(m*x + b)
+
+    fig,ax = plt.subplots()
+    ax.scatter(hrs,scores)
+    ax.plot(y,'-r',label='y=%.3fx+%.3f'%(m,b))
+    ax.set(xlabel='Hours studied',ylabel='Test score')
+    ax.legend()
+    plt.show()
+    
