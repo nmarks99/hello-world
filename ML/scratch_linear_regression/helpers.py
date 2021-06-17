@@ -73,4 +73,3 @@ def make_plot(points,b,m):
     ax.set(xlabel='Hours studied',ylabel='Test score')
     ax.legend()
     plt.show()
-    
