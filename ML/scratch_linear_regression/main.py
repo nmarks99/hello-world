@@ -4,9 +4,8 @@ import numpy as np
 def compute_error(b, m, points):
     # Initialize error at 0
     totalError = 0
-
     # For every point
-    for i in range(0,len(points):
+    for i in range(0,len(points)):
         # Get the x value
         x = points[i,0]
         # Get the y value
@@ -15,6 +14,7 @@ def compute_error(b, m, points):
         # Get difference, square it, add it to total error
         totalError += (y - (m*x + b))**2
 
+    # Return the averge
     return totalError / float(len(points))
 
 
