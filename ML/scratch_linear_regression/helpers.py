@@ -19,7 +19,6 @@ def compute_error(b, m, points):
     # Return the averge
     return totalError / float(len(points))
 
-
 def step_gradient(b_current,m_current,points,learningRate):
     
     b_gradient = 0
@@ -40,7 +39,6 @@ def step_gradient(b_current,m_current,points,learningRate):
     new_m = m_current - (learningRate * m_gradient)
 
     return (new_b,new_m)
-
 
 def gradient_descent_runner(points,starting_b,starting_m,learningRate,num_iterations):
     # Starting b and m values
