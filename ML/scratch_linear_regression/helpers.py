@@ -21,7 +21,7 @@ def compute_error(b, m, points):
 
 def step_gradient(b_current,m_current,points,learningRate):
     '''
-    step_gradient() computes gradient descent at each step up to 'points'
+    step_gradient() computes gradient descent at each step up to len(points)
     '''
     b_gradient = 0
     m_gradient = 0
