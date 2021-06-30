@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 import numpy as np
-import webbrowser
 
 url = "https://www.espn.com/soccer/scoreboard"
 page = requests.get(url)
