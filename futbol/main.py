@@ -1,3 +1,8 @@
+'''
+NOTE: May need to use selenium or something else if the problem is that the website is dynamic
+      Also could just use another website or something.
+'''
+
 import requests
 from bs4 import BeautifulSoup
 import numpy as np
