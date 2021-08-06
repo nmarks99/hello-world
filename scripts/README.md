@@ -1,2 +1,2 @@
-# Working with shell between programs
-Here I am testing calling python programs from C, calling C programs from python, and calling shell scripts from either of those languages as well.
+# Scripts
+These are some useful scripts/short programs I have wrote which I would like to save. There are also some that I am still testing/learning about.
