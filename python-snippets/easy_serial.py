@@ -1,7 +1,37 @@
+'''
+TODO: 
+    - Refactor using classes instead?
+
+easy_serial uses the PySerial library to create some useful functions
+that make serial communication with python very easy. 
+
+========
+Example:
+========
+import easy_serial as es
+BOARD = 'metro'
+BAUD = 115200
+
+# Auto open serial port for the specified board and baudrate
+S = es.openSerialPort(board=BOARD,baudrate=BAUD)
+
+# Send a string
+es.writeString(S,"Hello")
+
+# Read a string
+result = es.readString(S)
+
+# Close the serial port
+es.closeSerialPort(S)
+    
+'''
+
+
 import serial
 import time
 import serial.tools.list_ports
 
+# Constants
 SEND_DELAY_S = 0.1 
 
 def getBoardInfo(board):
