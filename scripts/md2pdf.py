@@ -8,7 +8,7 @@ inmd = x[1] # Get name of markdown file
 outpdf = x[2] # Get name of output pdf
 
 # pandoc command
-cmd = ('pandoc ' 
+cmd = ('pandoc --number-sections ' 
 '-V geometry:paperwidth=8.5in '
 '-V geometry:paperheight=11in '
 '-V geometry:margin=1in ' 
