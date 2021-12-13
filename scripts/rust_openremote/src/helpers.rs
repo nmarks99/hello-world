@@ -36,7 +36,7 @@ pub fn is_repo() -> bool {
     // If directory name is "GitHub" open my repository page on GitHub 
     if &dir[dir.len()-6..dir.len()] == "GitHub"{
         open::that("https://github.com/nmarks99?tab=repositories").expect("Could not open GitHub.com");
-        return true;
+        return false;
     }
     else{
         let check_if_repo_cmd = String::from("git rev-parse --is-inside-work-tree");
@@ -45,7 +45,10 @@ pub fn is_repo() -> bool {
 
         match output {
             "true\n" => return true,
-            _ => return false,
+            _ => {
+                    println!("Current directory is not a git repository");
+                    return false;
+                }
         }
     }
     

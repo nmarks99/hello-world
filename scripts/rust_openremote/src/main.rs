@@ -20,11 +20,6 @@ fn main() {
         open::that(repo_link).expect("Couldn't open the repo in browser"); 
     
     }
-
-    else{ // otherwise tell user they aren't in a repo
-        println!("Current directory is not a git repository");
-    }
-
     
 }
 
