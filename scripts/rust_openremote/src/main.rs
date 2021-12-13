@@ -3,7 +3,7 @@ mod helpers;
 fn main() {
 
 
-    if helpers::is_repo() {
+    if helpers::is_repo() { // check that cwd is a repo
         
         // cmd output is a std::process::Output struct
         let cmd_output: std::process::Output;
@@ -21,7 +21,7 @@ fn main() {
     
     }
 
-    else{
+    else{ // otherwise tell user they aren't in a repo
         println!("Current directory is not a git repository");
     }
 
