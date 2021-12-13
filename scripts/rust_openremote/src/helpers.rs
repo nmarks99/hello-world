@@ -36,6 +36,7 @@ pub fn is_repo() -> bool {
     let mut cwd = env::current_dir().unwrap();
     cwd.pop();
     let dir = cwd.as_path().display().to_string();
+    println!("{}",&dir[dir.len()-7..dir.len()]);
 
     // If directory name is "GitHub" open my repository page on GitHub 
     if &dir[dir.len()-7..dir.len()] == "GitHub"{
