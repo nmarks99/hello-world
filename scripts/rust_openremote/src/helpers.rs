@@ -32,7 +32,6 @@ pub fn is_repo() -> bool {
 
     let cwd = env::current_dir().unwrap();
     let dir = cwd.as_path().display().to_string();
-    println!("{}",&dir[dir.len()-6..dir.len()]);
 
     // If directory name is "GitHub" open my repository page on GitHub 
     if &dir[dir.len()-6..dir.len()] == "GitHub"{
