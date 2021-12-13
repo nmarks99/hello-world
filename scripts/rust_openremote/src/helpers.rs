@@ -1,6 +1,7 @@
 use std::process::{Command};
+use std::env;
 
-pub fn sys_command(command:String) -> String {
+pub fn sys_command(command:String) -> std::process::Output {
 
     // See if on windows 
     let windows = cfg!(target_os = "windows");
@@ -24,6 +25,29 @@ pub fn sys_command(command:String) -> String {
                 .output()
                 .expect("Command failed to execute");
 
-    let output = String::from_utf8(output.stdout).unwrap();
     return output;
+}
+
+pub fn is_repo() -> bool {
+
+    // Collect arguments (first index is current directory)
+    let args: Vec<String> = env::args().collect();
+    let path = &args[0][args[0].len()-11 .. args[0].len()-6];
+
+    // If directory name is "GitHub" open my repository page on GitHub 
+    if &path[..] == "GitHub"{
+        open::that("https://github.com/nmarks99?tab=repositories").expect("Could not open GitHub.com");
+        return true;
+    }
+    else{
+        let check_if_repo_cmd = String::from("git rev-parse --is-inside-work-tree");
+        let output = sys_command(check_if_repo_cmd);
+        let output = &String::from_utf8(output.stdout).unwrap()[..];
+
+        match output {
+            "true\n" => return true,
+            _ => return false,
+        }
+    }
+    
 }
