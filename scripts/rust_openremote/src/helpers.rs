@@ -14,7 +14,7 @@ pub fn sys_command(command:String) -> std::process::Output {
     }
     else{
         // Presumably the other option is a UNIX machine with "sh"
-        // I think this is a reasonable assumption
+        // If you have git-bash on windows this works for windows too
         prog = "sh";
         prog_flag = "-c";
     }
@@ -30,16 +30,12 @@ pub fn sys_command(command:String) -> std::process::Output {
 
 pub fn is_repo() -> bool {
 
-    // Collect arguments (first index is current directory)
-    // let args: Vec<String> = env::args().collect();
-    // let path = &args[0][args[0].len()-11 .. args[0].len()-6];
-    let mut cwd = env::current_dir().unwrap();
-    cwd.pop();
+    let cwd = env::current_dir().unwrap();
     let dir = cwd.as_path().display().to_string();
-    println!("{}",&dir[dir.len()-7..dir.len()]);
+    println!("{}",&dir[dir.len()-6..dir.len()]);
 
     // If directory name is "GitHub" open my repository page on GitHub 
-    if &dir[dir.len()-7..dir.len()] == "GitHub"{
+    if &dir[dir.len()-6..dir.len()] == "GitHub"{
         open::that("https://github.com/nmarks99?tab=repositories").expect("Could not open GitHub.com");
         return true;
     }

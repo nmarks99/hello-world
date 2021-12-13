@@ -12,9 +12,9 @@ fn main() {
         // Run the command
         cmd_output = helpers::sys_command(get_repo_url_cmd);
 
-        // Make a string from the output and remove the .git at the end
+        // Make a string from the output
         let cmd_output = String::from_utf8(cmd_output.stdout).unwrap();
-        let repo_link:&str = &cmd_output[0..cmd_output.len()-5];
+        let repo_link:&str = &cmd_output[..];
         
         // Open url in browser
         open::that(repo_link).expect("Couldn't open the repo in browser"); 
