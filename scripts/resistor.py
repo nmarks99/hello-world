@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+ 
 import sys
 
 # Enter three colors separated by spaces. Ignore tolerance 
