@@ -1,15 +1,14 @@
 // TODO: Add more command line options as I think of them
 use std::env;
+mod sys;
 
 fn main() {
 
     // Define URL to NUSTARS Google Drive
     let drive_url: String = String::from("https://drive.google.com/drive/u/0/folders/0B5v80C8y8Ch1bXU3OXFVblMxbms");
 
-
     // Define string to store command line arguments
     let args: Vec<String> = env::args().collect();
-
 
     // let filename = &args[0];
     let nargs:usize = args.len();
