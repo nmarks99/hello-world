@@ -36,8 +36,9 @@ void split_string(std::string instring, std::vector<std::string> &split_vec, cha
         }
         
         if (i == LEN) {
+            // do this again at the end so we don't miss the last string
             split_vec.push_back(std::string(temp_vec.begin(), temp_vec.end()));
-            temp_vec.clear(); // clear temp vec 
+            temp_vec.clear();
         }
     }
 }   
