@@ -23,8 +23,8 @@ class Student {
         }
 
         int calculateTotalScore() {
-            int total_score = 0;
-            for (int i=0; i < scores.size(); i++) {
+            size_t total_score = 0;
+            for (size_t i=0; i < scores.size(); i++) {
                 total_score += scores[i];
             }
             return total_score;
