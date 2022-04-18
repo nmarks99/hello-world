@@ -15,6 +15,6 @@ func main() {
     plot.SetYLabel("Y-Axis")
     plot.SetXrange(-2, 18)
     plot.SetYrange(-2, 18)
-    plot.SavePlot("2.png")
+    plot.SavePlot("plot.png")
 }
 
