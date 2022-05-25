@@ -29,11 +29,3 @@ def gen_unique_filename(default_name,extension, directory="./"):
 
     return outfile
 
-
-help(gen_unique_filename)
-directory = "./"
-default_name = "out"
-extension = ".txt"
-outfile = gen_unique_filename(default_name, extension, directory)
-print(outfile)
-
