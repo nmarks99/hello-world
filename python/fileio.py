@@ -1,7 +1,12 @@
 import os
 
-def gen_default_filename(default_name,extension, directory):
-
+def gen_unique_filename(default_name,extension, directory="./"):
+    '''
+    Generates a string "default_name.extension" if a file 
+    of that name does not already exist in the directory "directory". If a file of that 
+    name already exists, the generated string will be "default_name_1.extension". If that 
+    already exists, the string will be "default_name_2.extension" and so on.
+    '''
     contents = os.listdir(directory)
     nums = []
     f = False
@@ -25,9 +30,10 @@ def gen_default_filename(default_name,extension, directory):
     return outfile
 
 
+help(gen_unique_filename)
 directory = "./"
 default_name = "out"
 extension = ".txt"
-outfile = gen_default_filename(default_name, extension, directory)
+outfile = gen_unique_filename(default_name, extension, directory)
 print(outfile)
 
