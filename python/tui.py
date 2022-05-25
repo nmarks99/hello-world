@@ -59,7 +59,4 @@ def clear():
     '''
     Clears the screen
     '''
-
-
-
     os.system("clear || cls")
