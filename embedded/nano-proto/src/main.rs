@@ -2,26 +2,17 @@
 #![no_main]
 #![feature(core_intrinsics)]
 #![allow(dead_code)]
+#![allow(non_snake_case)]
 
 use core::{panic::PanicInfo};
 use core::intrinsics::volatile_store;
-mod atmega328p;
-use atmega328p::*;
+mod atmega328p; use atmega328p::*;
+mod utils; use utils::*;
 
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> ! {
     loop {}
 }
-
-
-fn LS1(bit: u8) -> u8 {
-    1 << (bit)
-}
-
-fn LS0(bit:u8) -> u8 {
-    0 << (bit)
-}
-
 
 #[arduino_hal::entry]
 fn main() -> ! {
@@ -40,9 +31,9 @@ fn main() -> ! {
 
         loop {
             volatile_store(PORTD,*PORTD | LS1(bit));
-            arduino_hal::delay_ms(1000);            
-            volatile_store(PORTD,*PORTD & LS0(bit));
-            arduino_hal::delay_ms(1000);
+            arduino_hal::delay_ms(500);            
+            volatile_store(PORTD,*PORTD & !LS1(bit));
+            arduino_hal::delay_ms(500);
         }
     }
 }
