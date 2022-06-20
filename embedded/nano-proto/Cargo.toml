@@ -16,3 +16,7 @@ embedded-hal = "0.2.3"
 git = "https://github.com/Rahix/avr-hal"
 rev = "4f8ab2594d4497bdfbd57b641c05c407f3b309f5"
 features = ["arduino-nano"]
+
+[dependencies.ruduino]
+git = "https://github.com/avr-rust/ruduino"
+rev = "61a8e0d1447bf4cd8ee329b608807ba2ea38a9c2"
