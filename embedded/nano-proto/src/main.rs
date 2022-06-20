@@ -1,13 +1,23 @@
 #![no_std]
 #![no_main]
+#![feature(core_intrinsics)]
+#![allow(dead_code)]
 
-use core::panic::PanicInfo;
-use ruduino::cores::current::PORTB;
+use core::{panic::PanicInfo};
+use core::intrinsics::volatile_store;
+mod atmega328p;
+use atmega328p::*;
 
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> ! {
     loop {}
 }
+
+
+fn LS1(bit: u8) -> u8 {
+    1 << (bit)
+}
+
 
 
 #[arduino_hal::entry]
@@ -18,41 +28,18 @@ fn main() -> ! {
     // // Digital pin 13 is also connected to an onboard LED marked "L"
     // let mut led = pins.d13.into_output();
     // led.set_low();
+
+    let bit:u8 = 5;
+
     unsafe {
+        volatile_store(DDRB,*DDRB | LS1(bit)); // pin 13 is output
+        // volatile_store(PORTB,*PORTB | LS1(bit));
 
         loop {
-            // led.toggle();
-            // arduino_hal::delay_ms(500);
-            // led.toggle();
-            // arduino_hal::delay_ms(500);
+            volatile_store(PORTB,*PORTB | !LS1(bit));
+            // arduino_hal::delay_ms(1000);            
+            // volatile_store(PORTB,*PORTB | !LS1(bit));
+            // arduino_hal::delay_ms(1000);
         }
     }
 }
-
-
-// #include <avr/io.h>
-// #include <util/delay.h>
-
-// #define MS_DELAY 3000
-
-// int main (void) {
-//     /*Set to one the fifth bit of DDRB to one
-//     **Set digital pin 13 to output mode */
-//     DDRB |= _BV(DDB5);
-
-//     while(1) {
-//         /*Set to one the fifth bit of PORTB to one
-//         **Set to HIGH the pin 13 */
-//         PORTB |= _BV(PORTB5);
-
-//         /*Wait 3000 ms */
-//         _delay_ms(MS_DELAY);
-
-//         /*Set to zero the fifth bit of PORTB
-//         **Set to LOW the pin 13 */
-//         PORTB &= ~_BV(PORTB5);
-
-//         /*Wait 3000 ms */
-//         _delay_ms(MS_DELAY);
-//     }
-// }
