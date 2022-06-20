@@ -18,6 +18,9 @@ fn LS1(bit: u8) -> u8 {
     1 << (bit)
 }
 
+fn LS0(bit:u8) -> u8 {
+    0 << (bit)
+}
 
 
 #[arduino_hal::entry]
@@ -26,20 +29,20 @@ fn main() -> ! {
     // let pins = arduino_hal::pins!(dp);
     
     // // Digital pin 13 is also connected to an onboard LED marked "L"
-    // let mut led = pins.d13.into_output();
+    // let mut led = pins.d2.into_output();
     // led.set_low();
 
-    let bit:u8 = 5;
+    let bit:u8 = 2;
 
     unsafe {
-        volatile_store(DDRB,*DDRB | LS1(bit)); // pin 13 is output
-        // volatile_store(PORTB,*PORTB | LS1(bit));
+        volatile_store(DDRD,*DDRD | LS1(bit)); // pin 13 is output
+        volatile_store(PORTD,*PORTD | LS1(bit));
 
         loop {
-            volatile_store(PORTB,*PORTB | !LS1(bit));
-            // arduino_hal::delay_ms(1000);            
-            // volatile_store(PORTB,*PORTB | !LS1(bit));
-            // arduino_hal::delay_ms(1000);
+            volatile_store(PORTD,*PORTD | LS1(bit));
+            arduino_hal::delay_ms(1000);            
+            volatile_store(PORTD,*PORTD & LS0(bit));
+            arduino_hal::delay_ms(1000);
         }
     }
 }
