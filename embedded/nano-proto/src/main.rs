@@ -5,7 +5,7 @@
 #![allow(non_snake_case)]
 
 use core::{panic::PanicInfo};
-use core::intrinsics::volatile_store;
+// use core::intrinsics::volatile_store;
 mod atmega328p; use atmega328p::*;
 mod utils; use utils::*;
 
@@ -24,15 +24,13 @@ fn main() -> ! {
     // led.set_low();
 
     let bit:u8 = 2;
-
     unsafe {
-        volatile_store(DDRD,*DDRD | LS1(bit)); // pin 13 is output
-        volatile_store(PORTD,*PORTD | LS1(bit));
+        set_reg_bit(DDRD, bit, true); // set as output
 
         loop {
-            volatile_store(PORTD,*PORTD | LS1(bit));
+            set_reg_bit(PORTD, bit, true); // set high
             arduino_hal::delay_ms(500);            
-            volatile_store(PORTD,*PORTD & !LS1(bit));
+            set_reg_bit(PORTD, bit, false); // set low
             arduino_hal::delay_ms(500);
         }
     }
