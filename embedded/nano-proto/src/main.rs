@@ -25,12 +25,12 @@ fn main() -> ! {
 
     let bit:u8 = 2;
     unsafe {
-        set_reg_bit(DDRD, bit, true); // set as output
+        set_bit(DDRD, bit, true); // set as output
 
         loop {
-            set_reg_bit(PORTD, bit, true); // set high
+            set_bit(PORTD, bit, true); // set high
             arduino_hal::delay_ms(500);            
-            set_reg_bit(PORTD, bit, false); // set low
+            set_bit(PORTD, bit, false); // set low
             arduino_hal::delay_ms(500);
         }
     }

@@ -5,7 +5,7 @@ pub fn LS1(bit: u8) -> u8 {
     1 << (bit)
 }
 
-pub unsafe fn set_reg_bit(addr: *mut u8, bit: u8, state: bool) {
+pub unsafe fn set_bit(addr: *mut u8, bit: u8, state: bool) {
     let val: u8;
     match state {
         true => val = *addr | LS1(bit),
