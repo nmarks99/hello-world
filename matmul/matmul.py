@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import numpy as np
 import time
 
@@ -12,7 +13,7 @@ def matmul(A,B) -> np.ndarray:
     for i in range(rowsA):
         for j in range(colsB):
             for k in range(rowsB):
-                C[i][j] += B[k][j] * A[j][k]
+                C[i][j] += B[i][k] * A[k][j]
     return C
 
 def time_it(operation,args=None) -> float:
@@ -26,26 +27,36 @@ def time_it(operation,args=None) -> float:
     return elap
 
 
-def verify_matmul():
-    DIMS = 3
-    A = np.random.rand(DIMS,DIMS)
-    B = np.random.rand(DIMS,DIMS)
+def verify_matmul(A,B):
     my_res = matmul(A,B)
     np_res = np.matmul(A,B)
-    # for i in range(len(my_res)):
-    #     for j in range(len(my_res[0])):    
-    #         pass
-    #         # assert(my_res[i][j] == np_res[i][j]),f"Mismatch at ({i},{j})"
-    print(my_res)
-    print("\n")
-    print(np_res)
-    return True
+    for i in range(len(my_res)):
+        for j in range(len(my_res[0])):    
+            assert(my_res[i][j] == np_res[i][j]),f"Mismatch at {i,j}"
 
 def main():
-    
-    A = [[0.012513,5.635853,1.933042],[8.087405,5.850093,4.798730],[3.502915,8.959624,8.228400]]
-    B = [[7.466048,1.741081,8.589435],[7.105014,5.135350,3.039949],[0.149846,0.914029,3.644520]]
-    matmul(A,B)
+    DIMS = 128
+    A = np.random.rand(DIMS,DIMS) 
+    B = np.random.rand(DIMS,DIMS) 
+    print(f"Multiplying a {DIMS} x {DIMS} Matrix")
+    iter = 5
+    i = 0
+    times = []
+    while i < iter:
+        elap = time_it(matmul,args=[A,B]) 
+        times.append(elap)
+        print(f"Elapsed time = {elap:.4f} s")
+        i += 1
+    print(f"Mean = {np.mean(times):.4f} s")
+
+
+
+
+
+
+
+
+
 
 if __name__ == "__main__":
     main()
