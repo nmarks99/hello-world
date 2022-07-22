@@ -2,7 +2,7 @@
 #include<time.h>
 #include<stdlib.h>
 
-#define DIMS 256
+#define DIMS 3
 #define SIZE DIMS * sizeof(1.0)
 
 // Currently its a square matrix
@@ -67,28 +67,53 @@ void random_fill() {
 
 
 int main() {
-    printf("Multiplying a %u x %u matrix:\n",DIMS,DIMS);
-    int i = 0;
     random_fill();
-    clock_t t0, tf;
-    double times[sizeof(1.0)*5];
-    int iter = 5;
-    while (i < iter){
-        t0 = clock();
-        matmul();
-        tf = clock();
-        double elap = (double)(tf - t0)/CLOCKS_PER_SEC;
-        times[i] = elap;
-        printf("Elapsed time = %.4lf s\n",elap);
-        i++; 
+    matmul();
+    size_t i,j;
+    for (i = 0; i < 3; i++){
+        for (j = 0; j < 3; j++){
+            printf("%f,",A[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+    for (i = 0; i < 3; i++){
+        for (j = 0; j < 3; j++){
+            printf("%f,",B[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+    for (i = 0; i < 3; i++){
+        for (j = 0; j < 3; j++){
+            printf("%f,",A[i][j]);
+        }
+        printf("\n");
     }
 
-    double mean_time;
-    for (i = 0; i < iter; i++) {
-        mean_time += times[i];
-    }
-    mean_time = mean_time/iter;
-    printf("Mean = %.4f s\n",mean_time);
+
+    // printf("Multiplying a %u x %u matrix:\n",DIMS,DIMS);
+    // int i = 0;
+    // random_fill();
+    // clock_t t0, tf;
+    // double times[sizeof(1.0)*5];
+    // int iter = 5;
+    // while (i < iter){
+    //     t0 = clock();
+    //     matmul();
+    //     tf = clock();
+    //     double elap = (double)(tf - t0)/CLOCKS_PER_SEC;
+    //     times[i] = elap;
+    //     printf("Elapsed time = %.4lf s\n",elap);
+    //     i++; 
+    // }
+
+    // double mean_time;
+    // for (i = 0; i < iter; i++) {
+    //     mean_time += times[i];
+    // }
+    // mean_time = mean_time/iter;
+    // printf("Mean = %.4f s\n",mean_time);
 
     return 0;
 }
