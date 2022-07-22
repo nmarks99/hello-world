@@ -4,20 +4,22 @@
 
 #define DIMS 256
 #define SIZE DIMS * sizeof(1.0)
+
+// Currently its a square matrix
 #define rowsA DIMS
 #define colsA DIMS
 #define rowsB DIMS
 #define colsB DIMS
 
-
 float A[SIZE][SIZE];
 float B[SIZE][SIZE];
 float C[SIZE][SIZE];
 
-
-
 void matmul() {
-
+    /*
+    Arguably the simplest possible way to do matrix multiplication.
+    There are much faster implementations out there.
+    */
     size_t i, j, k;
     for (i = 0; i < rowsA; i++) {
         for (j = 0; j < colsB; j++) {
@@ -87,15 +89,6 @@ int main() {
     }
     mean_time = mean_time/iter;
     printf("Mean = %.4f s\n",mean_time);
-
-
-    // size_t i, j;
-    // for (i = 0; i < DIMS; i++) {
-    //     for (j =0; j < DIMS; j++){
-    //         printf("%f, ",A[i][j]);
-    //     }
-    //     printf("\n");
-    // }
 
     return 0;
 }
