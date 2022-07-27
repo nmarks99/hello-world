@@ -12,6 +12,7 @@ def gen_unique_filename(default_name,extension, directory="./"):
     f = False
     for name in contents:
         if default_name in name:
+            print("Aha")
             f = True
             for ch in name:
                 if ch.isdigit():
@@ -29,3 +30,5 @@ def gen_unique_filename(default_name,extension, directory="./"):
 
     return outfile
 
+of = gen_unique_filename("out",".txt","./data")
+print(of)
