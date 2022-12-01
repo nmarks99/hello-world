@@ -1,2 +1,2 @@
-# I am suzy q and I made this change
+# Hello World
 This repository contains random code snippets I want to save
