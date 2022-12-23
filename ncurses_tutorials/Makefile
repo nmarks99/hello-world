@@ -8,6 +8,8 @@
 	g++ 3_tutorial.cpp -lncurses -o 3.out
 4: 4_tutorial.cpp
 	g++ 4_tutorial.cpp -lncurses -o 4.out
+5: 5_tutorial.cpp
+	g++ 5_tutorial.cpp -lncurses -o 5.out
 
 clean:
 	rm ./*.out
