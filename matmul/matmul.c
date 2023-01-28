@@ -2,7 +2,7 @@
 #include<time.h>
 #include<stdlib.h>
 
-#define DIMS 128
+#define DIMS 5
 #define SIZE DIMS * sizeof(1.0)
 
 // Currently its a square matrix
@@ -63,6 +63,18 @@ void random_fill() {
 }
 
 
+void display() {
+
+    for(int i = 0; i < DIMS; i++) {
+        for(int j = 0; j < DIMS; j++){
+            if (abs(C[i][j]) <= 1e-6) {
+                C[i][j] = 0.0;
+            }
+            printf("%.2f\t",C[i][j]);
+        }
+        printf("\n");
+    }
+}
 
 
 
@@ -93,5 +105,6 @@ int main() {
     mean_time = mean_time/iter;
     printf("Mean = %.4f s\n",mean_time);
 
+    display();
     return 0;
 }
