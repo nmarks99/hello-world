@@ -26,7 +26,7 @@
 
 bool check_bit(int n, int index) {
 
-    if ((n & (1 << index)) == (1 << index)) {
+    if ((n & (1 << index)) != 0) {
         printf("bit at index %d is ON\n", index+1);
         return true;
     }
