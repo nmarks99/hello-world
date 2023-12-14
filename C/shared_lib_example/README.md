@@ -1,9 +1,10 @@
 Current directory for this example:
-
+```
 ├── README.md
 ├── foo.c
 ├── foo.h
 └── main.c
+```
 
 1. Compile library into an object file with "-fPIC" flag. This creates a "foo.o" file
 ```
