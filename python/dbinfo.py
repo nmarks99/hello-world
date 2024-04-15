@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
 
+# TODO:
+# - handle comments
+# - test with random databases on APSshare
+
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 import sys
+import argparse
 
 @dataclass
 class Record:
@@ -14,10 +19,9 @@ class Record:
         if prefix:
             print(f"[{self.type}] {self.name}") 
         else:
-            name_out =  self.name.replace("$(P)$(R)", "")
+            name_out =  self.name.replace("$(P)", "").replace("$(R)", "")
             print(f"[{self.type}] {name_out}") 
         
-
 
 class EPICSDatabase:
     def __init__(self, path):
@@ -66,24 +70,27 @@ class EPICSDatabase:
     def find(self, name: str) -> Record:
         record_out = None
         for r in self.database:
-            if r.name == name or r.name.replace("$(P)$(R)","") == name:
+            if r.name == name or r.name.replace("$(P)","").replace("$(R)", "") == name:
                 record_out = r
         return record_out
 
 
 if __name__ == "__main__":
-    assert len(sys.argv) > 1 and len(sys.argv) <= 3, "invalid input"
-    path = sys.argv[1]
-    db = EPICSDatabase(path)
-    
-    if len(sys.argv) == 2:
-        db.show_all()
-    
-    elif len(sys.argv) == 3:
-        record_in = sys.argv[2]
-        r = db.find(record_in)
+    parser = argparse.ArgumentParser(description='Quickly get information from an EPICS database')
+    parser.add_argument('path', help='Path to the database file')
+    parser.add_argument('record', nargs='?', help='Record name to find and print infomation about')
+    args = parser.parse_args()
+
+    db = EPICSDatabase(args.path)
+
+    if args.record is not None:
+        r = db.find(args.record)
         if r is not None:
             print(f"[{r.type}] {r.name}")
             for k, v in r.fields.items():
                 print(f"{k} = {v}")
-    
+        else:
+            print(f"Record {args.record} not found")
+
+    else:
+        db.show_all()
