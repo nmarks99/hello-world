@@ -1,6 +1,6 @@
 -- Returns a new string with all occurances of 
 -- a substring 'old' in 'str' replaced with 'new'
-function string_replace(str, old, new)
+function string.replace(str, old, new)
     local result = ""
     local start_index = 1
     while true do
@@ -16,7 +16,7 @@ function string_replace(str, old, new)
 end
 
 -- splits a string into a table by a delimeter and returns the table
-function string_split(input_str, delimiter)
+function string.split(input_str, delimiter)
     local words = {}
     delimiter = delimiter or "%s"  -- Default delimiter is whitespace
     local pattern = string.format("([^%s]+)", delimiter)
@@ -26,3 +26,9 @@ function string_split(input_str, delimiter)
     return words
 end
 
+-- Test:
+local a = "one,two,three"
+local a_split = string.split(a, ",")
+for i,v in ipairs(a_split) do
+    print(i,v)
+end
