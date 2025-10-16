@@ -23,14 +23,28 @@ std::vector<double> arange(double start, double stop, double step) {
     return out;
 }
 
+double linear_map(double value, double a1, double a2, double b1, double b2) {
+    const double m = (b2 - b1) / (a2 - a1);
+    const double b = b1 - m * a1;
+    return m*value + b;
+}
+
 int main() {
 
-
     // create a sine wave
-    auto x = arange(0.0, 100.0, 1);
+    auto x = arange(0.0, 10*M_PI, 0.01);
     std::vector<double> y;
     for (const auto &v : x) {
 	y.push_back(std::sin(v));
+    }
+
+    std::vector<int> xnew;
+    std::vector<int> ynew;
+    for (size_t i = 0; i < x.size(); i++) {
+	auto xi = static_cast<int>(linear_map(x.at(i), 0, 10*M_PI, 0, 342));
+	auto yi = static_cast<int>(linear_map(y.at(i), -1, 1, 0+5, 112-5));
+	xnew.push_back(xi);
+	ynew.push_back(yi);
     }
 
     auto screen = ScreenInteractive::Fullscreen();
@@ -41,15 +55,18 @@ int main() {
     // and y is four units wide. So if the screen is 100x100, a point can
     // be drawn at the center of the screen with DrawPointOn(200/2,400/2)
     auto plot_renderer = Renderer([&]{
-	auto can = canvas([] (Canvas &c) {
-	    for (int i = 0; i < c.height()-1; i++) {
-		if (i % 4 == 0) {
-		    c.DrawText(0, i, std::to_string(i)+"-");
-		}
+	auto can = canvas([&] (Canvas &c) {
+	    for (size_t i = 0; i < x.size(); i++) {
+		c.DrawPoint(xnew.at(i), ynew.at(i), true, Color::Red);
 	    }
-	    c.DrawPointLine(6, 6, c.width(), c.height(), Color::Blue);
-	    c.DrawPointLine(0, c.height()-1, c.width(), c.height()-1, Color::Green);
-	    c.DrawPointLine(6, c.height()/2, c.width()/2, c.height()/2, Color::BlueViolet);
+	    // for (int i = 0; i < c.height()-1; i++) {
+		// if (i % 4 == 0) {
+		    // c.DrawText(0, i, std::to_string(i)+"-");
+		// }
+	    // }
+	    c.DrawPointLine(1, 1, c.width(), 1, Color::Blue);
+	    // c.DrawPointLine(0, c.height()-1, c.width(), c.height()-1, Color::Green);
+	    // c.DrawPointLine(6, c.height()/2, c.width()/2, c.height()/2, Color::BlueViolet);
 	});
 	return can | flex;
     });
