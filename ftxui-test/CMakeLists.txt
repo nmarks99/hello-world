@@ -12,7 +12,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 find_package(ftxui REQUIRED)
 
-add_executable(ftxui-test src/main.cpp)
+add_executable(ftxui-test src/main.cpp src/plot.cpp)
 target_include_directories(ftxui-test PRIVATE src)
 
 target_link_libraries(ftxui-test
