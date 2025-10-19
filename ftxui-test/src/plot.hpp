@@ -5,6 +5,8 @@
 #include <ftxui/dom/elements.hpp>
 #include <ftxui/util/ref.hpp>
 
+std::vector<double> arange(double start, double stop, double step);
+
 namespace ftxui {
 
 constexpr double scale_default_min = -std::numeric_limits<double>::infinity();
