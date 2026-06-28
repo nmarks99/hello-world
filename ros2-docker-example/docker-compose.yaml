@@ -1,0 +1,18 @@
+services:
+  ros_jazzy:
+    build: .
+    container_name: ros2_jazzy_container
+    stdin_open: true
+    tty: true
+    network_mode: host
+    ipc: host
+    # Direct access to local graphics card devices
+    devices:
+      - /dev/dri:/dev/dri
+    volumes:
+      - ./src:/workspace/src
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro
+    working_dir: /workspace
+    environment:
+      - "ROS_DISTRO=jazzy"
+      - "DISPLAY=${DISPLAY}"
